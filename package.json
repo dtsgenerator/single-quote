@@ -1,6 +1,6 @@
 {
   "name": "@dtsgenerator/single-quote",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "change all quotation mark to single",
   "main": "index.js",
   "publishConfig": {
@@ -22,9 +22,10 @@
     "url": "git+ssh://git@github.com/dtsgenerator/single-quote.git"
   },
   "keywords": [
-    "dtsgenerator"
+    "dtsgenerator",
+    "dtsgenerator-plugin"
   ],
-  "author": "horiuchi",
+  "author": "Horiuchi Hiroki <horiuchi.g@gmail.com> (https://github.com/horiuchi)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/dtsgenerator/single-quote/issues"
