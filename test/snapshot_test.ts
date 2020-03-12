@@ -31,11 +31,10 @@ describe('Snapshot testing', () => {
                 return;
             }
 
-            const result = ts.transform(input, [factory]);
+            const result = ts.transform(Array.from(input.statements), [factory]);
             result.dispose();
-            const transformed = result.transformed[0];
             const printer = ts.createPrinter();
-            const actual = printer.printFile(transformed);
+            const actual = printer.printFile(input);
 
             // When we do `UPDATE_SNAPSHOT=1 npm test`, update snapshot data.
             if (process.env.UPDATE_SNAPSHOT) {

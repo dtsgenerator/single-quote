@@ -3,13 +3,13 @@ import ts from 'typescript';
 
 const singleQuote: Plugin = {
     meta: {
-        description: 'Replace the namespace names.',
+        description: 'Change all quotation to single',
     },
     create,
 };
 
-async function create(_pluginContext: PluginContext): Promise<ts.TransformerFactory<ts.SourceFile> | undefined> {
-    return (context: ts.TransformationContext) => (root: ts.SourceFile): ts.SourceFile => {
+async function create(_pluginContext: PluginContext): Promise<ts.TransformerFactory<ts.Statement> | undefined> {
+    return (context: ts.TransformationContext) => (root: ts.Statement): ts.Statement => {
         function visit(node: ts.Node) {
             node = ts.visitEachChild(node, visit, context);
 
