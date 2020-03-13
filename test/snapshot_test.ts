@@ -12,17 +12,25 @@ const configFileName = 'config.json';
 const expectedFileName = 'expected.d.ts';
 
 describe('Snapshot testing', () => {
-    fs.readdirSync(fixturesDir).map((caseName) => {
+    fs.readdirSync(fixturesDir).map(caseName => {
         const normalizedTestName = caseName.replace(/-/g, ' ');
-        it(`Test ${normalizedTestName}`, async function () {
+        it(`Test ${normalizedTestName}`, async function() {
             const fixtureDir = path.join(fixturesDir, caseName);
             const inputFilePath = path.join(fixtureDir, inputFileName);
             const configFilePath = path.join(fixtureDir, configFileName);
             const expectedFilePath = path.join(fixtureDir, expectedFileName);
 
-            const inputContent = fs.readFileSync(inputFilePath, { encoding: 'utf-8' });
-            const input = ts.createSourceFile('', inputContent, ts.ScriptTarget.Latest);
-            const option = fs.existsSync(configFilePath) ? require(configFilePath) : {};
+            const inputContent = fs.readFileSync(inputFilePath, {
+                encoding: 'utf-8'
+            });
+            const input = ts.createSourceFile(
+                '',
+                inputContent,
+                ts.ScriptTarget.Latest
+            );
+            const option = fs.existsSync(configFilePath)
+                ? require(configFilePath)
+                : {};
 
             const context = { option } as PluginContext;
             const factory = await plugin.create(context);
@@ -31,7 +39,9 @@ describe('Snapshot testing', () => {
                 return;
             }
 
-            const result = ts.transform(Array.from(input.statements), [factory]);
+            const result = ts.transform(Array.from(input.statements), [
+                factory
+            ]);
             result.dispose();
             const printer = ts.createPrinter();
             const actual = printer.printFile(input);
@@ -42,11 +52,17 @@ describe('Snapshot testing', () => {
                 this.skip();
                 return;
             }
-            const expected = fs.readFileSync(expectedFilePath, { encoding: 'utf-8' });
-            assert.equal(actual, expected, `
+            const expected = fs.readFileSync(expectedFilePath, {
+                encoding: 'utf-8'
+            });
+            assert.equal(
+                actual,
+                expected,
+                `
 ${fixtureDir}
 ${actual}
-`);
+`
+            );
         });
     });
 });
