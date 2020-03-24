@@ -11,4 +11,11 @@ npm install @dtsgenerator/single-quote
 
 # Usage
 
-TBD
+`.dtsgenrc.json`
+```json
+{
+    "plugins": {
+        "@dtsgenerator/single-quote": true
+    }
+}
+```
