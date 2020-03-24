@@ -1,12 +1,19 @@
 import { Plugin, PluginContext } from 'dtsgenerator';
 import ts from 'typescript';
 
-async function create(
+const singleQuote: Plugin = {
+    meta: {
+        description: 'Change all quotation to single',
+    },
+    postProcess,
+};
+
+async function postProcess(
     _pluginContext: PluginContext
-): Promise<ts.TransformerFactory<ts.Statement> | undefined> {
+): Promise<ts.TransformerFactory<ts.SourceFile> | undefined> {
     return (context: ts.TransformationContext) => (
-        root: ts.Statement
-    ): ts.Statement => {
+        root: ts.SourceFile
+    ): ts.SourceFile => {
         function visit(node: ts.Node): ts.Node {
             node = ts.visitEachChild(node, visit, context);
 
@@ -22,12 +29,5 @@ async function create(
         return ts.visitNode(root, visit);
     };
 }
-
-const singleQuote: Plugin = {
-    meta: {
-        description: 'Change all quotation to single'
-    },
-    create
-};
 
 export default singleQuote;
