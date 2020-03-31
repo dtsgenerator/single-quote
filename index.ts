@@ -3,6 +3,7 @@ import ts from 'typescript';
 
 const singleQuote: Plugin = {
     meta: {
+        name: 'single quote',
         description: 'Change all quotation to single',
     },
     postProcess,
