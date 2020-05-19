@@ -1,10 +1,14 @@
 import { Plugin, PluginContext } from 'dtsgenerator';
 import ts from 'typescript';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const packageJson = require('./package.json');
+
 const singleQuote: Plugin = {
     meta: {
-        name: 'single quote',
-        description: 'Change all quotation to single',
+        name: packageJson.name,
+        version: packageJson.version,
+        description: packageJson.description,
     },
     postProcess,
 };
@@ -19,7 +23,8 @@ async function postProcess(
             node = ts.visitEachChild(node, visit, context);
 
             if (ts.isStringLiteral(node)) {
-                // `singleQuote` property is internal. via: https://github.com/microsoft/TypeScript/blob/v3.8.3/src/compiler/types.ts#L1352
+                // `singleQuote` is internal property.
+                // via: https://github.com/microsoft/TypeScript/blob/v3.9.2/src/compiler/types.ts#L1353
                 ((node as unknown) as {
                     singleQuote: boolean;
                 }).singleQuote = true;
