@@ -1,5 +1,4 @@
-import { Plugin, PluginContext } from 'dtsgenerator';
-import ts from 'typescript';
+import { ts, Plugin, PluginContext } from 'dtsgenerator';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const packageJson = require('./package.json');
