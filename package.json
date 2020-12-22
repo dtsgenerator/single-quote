@@ -1,6 +1,6 @@
 {
   "name": "@dtsgenerator/single-quote",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "change all quotation mark to single",
   "main": "index.js",
   "publishConfig": {
